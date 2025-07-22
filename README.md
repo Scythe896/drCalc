@@ -1,2 +1,2 @@
-# drCalc
-Bootdev Personal Project 1
+# Drop rate calculator and grapher
+This project will calculate the percentage chance of recieving a drop by certain breakpoints as well as an estimated timeframe and present them in a graph through the command line.
