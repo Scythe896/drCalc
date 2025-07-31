@@ -7,8 +7,13 @@ def get_drop_rate(message):
     if "/" in rate:
         parts = rate.split("/")
         try:
-            res = float(parts[0]) / float(parts[1])
+            parts1 = float(parts[0])
+            parts2 = float(parts[1])
         except ValueError:
+            return get_drop_rate("Invalid drop rate. Please enter in format(x/y or 0.x):")
+        try:
+            res = parts1 / parts2
+        except ZeroDivisionError:
             return get_drop_rate("Invalid drop rate. Please enter in format(x/y or 0.x):")
     else:
         try:
