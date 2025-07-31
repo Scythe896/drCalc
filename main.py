@@ -5,32 +5,29 @@ from formatting import *
 def get_drop_rate(message):
     rate = input(message)
     if "/" in rate:
-        temp = rate.split("/")
-        if parts_is_float(temp) and temp[1] != "0" and temp[0] != "0":
-            return float(temp[0]) / float(temp[1])
-    elif "." in rate:
-        temp = rate.split(".")
-        if parts_is_float(temp) and temp[0] == "0" and temp[1] != "0":
-            return float(rate)
+        parts = rate.split("/")
+        try:
+            res = float(parts[0]) / float(parts[1])
+        except ValueError:
+            return get_drop_rate("Invalid drop rate. Please enter in format(x/y or 0.x):")
+    else:
+        try:
+            res = float(rate)
+        except ValueError:
+            return get_drop_rate("Invalid drop rate. Please enter in format(x/y or 0.x):")
+    if res > 0 and res < 1:
+        return res
     return get_drop_rate("Invalid drop rate. Please enter in format(x/y or 0.x):")
 
 def get_time(message):
     time = input(message)
-    if "." in time:
-        temp = time.split(".")
-        if parts_is_float(temp):
-            return float(time)
-    if parts_is_float(temp):
-        return float(time)
-    return get_time("Invalid time. Please try again:")
-
-def parts_is_float(input):
     try:
-        float(input[0])
-        float(input[1])
+        res = float(time)
     except ValueError:
-        return False
-    return True
+        return get_time("Invalid time. Please try again:")
+    if res > 0:
+        return res
+    return get_time("Invalid time. Please try again:")
     
 def main():
     drop_rate = get_drop_rate("Enter drop rate(x/y, 0.x):")
